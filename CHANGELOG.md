@@ -4,8 +4,16 @@ Toutes les modifications notables de ce projet sont documentées dans ce fichier
 
 ## [Unreleased]
 
-- Ajout des données initiales (seed) prévu.
-- Modèles `Salle` et `Reservation` créés.
+- Documentation des réponses aux questions des étapes.
+
+## [0.4.0] - 2026-09-05
+
+### Ajouté
+
+- `database/seed.php` : ajoute les cinq salles de référence (Amphithéâtre A,
+  Salle B12, Laboratoire Chimie, Salle Informatique 1, Salle de réunion).
+- Seed reproductible : `firstOrCreate()` sur le nom → aucune salle en doublon,
+  même si le script est relancé plusieurs fois.
 
 ## [0.3.0] - 2026-09-05
 
