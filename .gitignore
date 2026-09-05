@@ -1,0 +1,22 @@
+# Environnement
+/.env
+
+# Dépendances Composer
+/vendor/
+
+# Cache de tests (PHPUnit)
+.phpunit.result.cache
+.phpunit.cache/
+
+# IDE / éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Système
+.DS_Store
+Thumbs.db
