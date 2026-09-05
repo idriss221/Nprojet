@@ -17,7 +17,8 @@ des composants spécialisés installés via **Composer**.
 ## État du projet
 
 Ce dépôt suit un découpage en étapes versionnées (branches `feature/*` et tags
-`sujets`). Voir `CHANGELOG.md` pour l'historique détaillé.
+`sujets`). Voir `CHANGELOG.md` pour l'historique détaillé et `REPONSES.md` pour
+les réponses aux questions des étapes.
 
 ## Prérequis
 
