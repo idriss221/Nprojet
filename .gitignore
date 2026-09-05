@@ -20,3 +20,5 @@
 # Système
 .DS_Store
 Thumbs.db
+# Outils externes
+.kombai/
