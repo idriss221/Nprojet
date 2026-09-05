@@ -4,7 +4,17 @@ Toutes les modifications notables de ce projet sont documentées dans ce fichier
 
 ## [Unreleased]
 
-- Initialisation des tables (migrations Eloquent).
+- Ajout des données initiales (seed) prévu.
+- Modèles `Salle` et `Reservation` créés.
+
+## [0.3.0] - 2026-09-05
+
+### Ajouté
+
+- `App\Model\Salle` : table `salles`, `$fillable`, conversions (`capacite` int,
+  `active` bool, dates), relation `hasMany(Reservation)` → `$salle->reservations`.
+- `App\Model\Reservation` : table `reservations`, `$fillable`, conversions
+  (dates), constantes de statut, relation `belongsTo(Salle)` → `$reservation->salle`.
 
 ## [0.2.0] - 2026-09-05
 
