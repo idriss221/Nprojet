@@ -19,6 +19,14 @@ class Reservation extends Model
 {
     protected $table = 'reservations';
 
+    
+
+
+
+    protected $attributes = [
+        'statut' => self::STATUT_CONFIRMEE,
+    ];
+
     protected $fillable = [
         'salle_id',
         'responsable',
