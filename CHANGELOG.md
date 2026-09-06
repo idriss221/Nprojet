@@ -4,7 +4,20 @@ Toutes les modifications notables de ce projet sont documentées dans ce fichier
 
 ## [Unreleased]
 
-- Documentation des réponses aux questions des étapes.
+- Validation syntaxique, DTO et repositories en cours.
+
+## [0.5.0] - 2026-09-05
+
+### Ajouté
+
+- `App\Validation\ValidatorInterface` : contrat commun `validate(array): ValidationResult`.
+- `App\Validation\ValidationResult` : objet de valeur (valide ?, erreurs par champ,
+  données acceptées).
+- `App\Validation\SalleValidator` : nom, batiment, capacite, type, active
+  (Respect\Validation, messages français, plusieurs erreurs en une fois).
+- `App\Validation\ReservationValidator` : salle_id, responsable, email, motif,
+  dates (formats `Y-m-d H:i:s` et `Y-m-d\TH:i`).
+- Les comparaisons de dates (durée, futur, chevauchement) restent dans la couche métier.
 
 ## [0.4.0] - 2026-09-05
 
