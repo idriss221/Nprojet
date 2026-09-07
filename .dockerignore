@@ -1,0 +1,14 @@
+# Jamais dans l'image : secrets et métadonnées locales
+.env
+.git
+
+# Dépendances — réinstallées pendant le build de l'image
+vendor
+
+# Fichiers Docker eux-mêmes (inutiles dans l'image)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Journaux
+*.log

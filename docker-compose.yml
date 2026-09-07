@@ -1,0 +1,38 @@
+services:
+  # --- Application web (Apache + PHP 8.3) ---
+  web:
+    build: .
+    image: idriss45/gestion_de_salle_universitaire1:latest
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      DB_DRIVER: mysql
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: reservation_salles
+      DB_USERNAME: reservation
+      DB_PASSWORD: reservation123
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # --- Base de données MySQL 8 ---
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: change_me_root
+      MYSQL_DATABASE: reservation_salles
+      MYSQL_USER: reservation
+      MYSQL_PASSWORD: reservation123
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-pchange_me_root"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  db_data:
