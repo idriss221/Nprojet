@@ -141,4 +141,52 @@ Salle::firstOrCreate(['nom' => $donnees['nom']], $donnees);
 ```
 
 Eloquent cherche d'abord une salle portant ce nom : si elle existe, il la
-retourne sans rien créer ; sinon, il la crée avec les données fournies.
+retourne sans rien créer ; sinon, il la crée avec les données fournies.---
+
+## Étape 5 — La validation
+
+### 1. Pourquoi séparer la validation syntaxique des règles métier ?
+
+Parce qu'elles n'ont **pas la même nature ni le même emplacement** :
+
+- **syntaxique** (forme) : « l'e-mail a-t-il un format valide ? », « le motif
+  fait-il entre 5 et 255 caractères ? » → dans les validateurs.
+- **métier** (fond) : « la salle est-elle libre pendant cette période ? »,
+  « la durée dépasse-t-elle 4 h ? », « la date est-elle dans le futur ? » →
+  dans les services.
+
+Une validation **syntaxique** ne nécessite aucune base de données : elle ne
+vérifie que la forme des données. Une règle **métier** au contraire a besoin de
+contexte (par exemple interroger les réservations existantes pour détecter un
+chevauchement). Les séparer permet de tester chacune indépendamment et de
+garder les validateurs purs de toute dépendance.
+
+### 2. Pourquoi créer une interface de validation ?
+
+Pour que tous les validateurs aient une **signature commune**
+(`validate(array $data): ValidationResult`). Le contrôleur peut alors utiliser
+n'importe quel validateur (`SalleValidator` ou `ReservationValidator`) de la
+même façon, sans connaître la classe précise. Cela respecte le principe
+d'inversion des dépendances : on dépend d'un contrat, pas d'une implémentation.
+
+### 3. Pourquoi le validateur ne doit-il pas enregistrer les données ?
+
+Parce que la validation est une **lecture** sans **effet de bord**. Si le
+validateur sauvegardait en base, il faudrait lui fournir le repository (ce qui
+le complexifie), et il échouerait dès qu'on voudrait valider des données sans
+persister (pré-remplissage d'un formulaire, tests). Enregistrer est le rôle du
+**service**, qui appelle le repository APRÈS une validation réussie.
+
+### 4. Comment retourner plusieurs erreurs en une seule fois ?
+
+Avec Respect\Validation, on décrit toutes les règles attendues via `v::key()` :
+
+```php
+$validator = v::key('motif', v::notEmpty()->length(5, 255)->setName('motif'))
+    ->key('email', v::notEmpty()->email()->setName('email'));
+```
+
+Puis `assert($data)` lève une `NestedValidationException` dont
+`getMessages()` retourne un **tableau champ → message** pour TOUTES les erreurs
+d'un coup. Le `ValidationResult` les capture et les expose via `errors()`.
+

@@ -4,7 +4,7 @@ Toutes les modifications notables de ce projet sont documentées dans ce fichier
 
 ## [Unreleased]
 
-- Validation syntaxique, DTO et repositories en cours.
+- Rien pour l'instant — développement arrêté à l'étape 5 (v0.5.0).
 
 ## [0.5.0] - 2026-09-05
 
