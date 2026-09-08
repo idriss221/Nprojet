@@ -23,4 +23,7 @@ interface SalleRepositoryInterface
 
     
     public function create(array $donnees): Salle;
+
+    
+    public function update(int $id, array $donnees): bool;
 }
