@@ -24,6 +24,18 @@ return [
     SalleRepositoryInterface::class => autowire(EloquentSalleRepository::class),
     ReservationRepositoryInterface::class => autowire(EloquentReservationRepository::class),
 
+    SalleValidator::class => autowire(SalleValidator::class),
+    ReservationValidator::class => autowire(ReservationValidator::class),
+
+    SalleService::class => autowire(SalleService::class),
+    CreerReservationService::class => autowire(CreerReservationService::class),
+    AnnulerReservationService::class => autowire(AnnulerReservationService::class),
+
+    SalleController::class => autowire(SalleController::class),
+    ReservationController::class => autowire(ReservationController::class),
+
+    Application::class => autowire(Application::class),
+
     Manager::class => factory(static function (): Manager {
         $capsule = new Manager();
         $capsule->addConnection([
