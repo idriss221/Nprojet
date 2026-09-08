@@ -22,17 +22,8 @@ final readonly class CreerSalleDTO
     ) {
     }
 
-    
-
-
     public static function fromArray(array $data): self
     {
-        return new self(
-            nom: (string) ($data['nom'] ?? ''),
-            batiment: (string) ($data['batiment'] ?? ''),
-            capacite: (int) ($data['capacite'] ?? 0),
-            type: (string) ($data['type'] ?? ''),
-            active: filter_var($data['active'] ?? false, FILTER_VALIDATE_BOOLEAN),
-        );
+        return CreerSalleDTOBuilder::fromArray($data);
     }
 }

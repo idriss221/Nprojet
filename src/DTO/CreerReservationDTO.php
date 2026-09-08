@@ -25,33 +25,8 @@ final readonly class CreerReservationDTO
     ) {
     }
 
-    
-
-
     public static function fromArray(array $data): self
     {
-        return new self(
-            salleId: (int) ($data['salle_id'] ?? 0),
-            responsable: (string) ($data['responsable'] ?? ''),
-            email: (string) ($data['email'] ?? ''),
-            motif: (string) ($data['motif'] ?? ''),
-            dateDebut: self::convertDate($data['date_debut'] ?? ''),
-            dateFin: self::convertDate($data['date_fin'] ?? ''),
-        );
-    }
-
-    
-
-
-    private static function convertDate(string $date): DateTimeImmutable
-    {
-        foreach (['Y-m-d H:i:s', 'Y-m-d\TH:i'] as $format) {
-            $parsed = DateTimeImmutable::createFromFormat($format, $date);
-            if ($parsed !== false) {
-                return $parsed;
-            }
-        }
-
-        return new DateTimeImmutable($date);
+        return CreerReservationDTOBuilder::fromArray($data);
     }
 }
