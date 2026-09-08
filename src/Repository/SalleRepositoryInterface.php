@@ -9,10 +9,6 @@ use App\Model\Salle;
 
 
 
-
-
-
-
 interface SalleRepositoryInterface
 {
     
