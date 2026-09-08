@@ -6,6 +6,8 @@ namespace App\Controller;
 
 abstract class AbstractController
 {
+    protected string $titre = '';
+
     protected function render(string $vue, array $donnees = [], string $titre = ''): string
     {
         extract($donnees, EXTR_SKIP);
