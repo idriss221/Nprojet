@@ -25,4 +25,15 @@ final class EloquentSalleRepository implements SalleRepositoryInterface
     {
         return Salle::create($donnees);
     }
+
+    public function update(int $id, array $donnees): bool
+    {
+        $salle = Salle::find($id);
+
+        if ($salle === null) {
+            return false;
+        }
+
+        return (bool) $salle->update($donnees);
+    }
 }
