@@ -1,13 +1,12 @@
 <?php
 
-
 ?>
 <div class="barre-outils">
-    <a class="bouton" href="/reservations/create">Nouvelle réservation</a>
+    <a class="bouton" href="/reservations/create">📅 Nouvelle réservation</a>
 </div>
 
 <form class="filtre" method="get" action="/reservations">
-    <label for="salle">Filtrer par salle</label>
+    <label for="salle"><strong>Filtrer par salle :</strong></label>
     <select id="salle" name="salle" onchange="this.form.submit()">
         <option value="">Toutes les salles</option>
         <?php foreach ($salles as $salle): ?>
@@ -19,46 +18,51 @@
 </form>
 
 <?php if ($reservations === []): ?>
-    <p class="vide">Aucune réservation trouvée.</p>
+    <div class="etat-vide">
+        <div class="etat-vide-icon">📭</div>
+        <div class="etat-vide-titre">Aucune réservation trouvée</div>
+        <div class="etat-vide-texte">Créez une nouvelle réservation pour commencer</div>
+        <a class="bouton" href="/reservations/create">Créer une réservation</a>
+    </div>
 <?php else: ?>
-    <div class="tableau-enveloppe">
-        <table class="tableau">
-            <thead>
-                <tr>
-                    <th>Salle</th>
-                    <th>Responsable</th>
-                    <th>Motif</th>
-                    <th>Début</th>
-                    <th>Fin</th>
-                    <th>Statut</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($reservations as $reservation): ?>
-                    <tr>
-                        <td><a href="/reservations/<?= (int) $reservation->id ?>"><?= $this->e($reservation->salle->nom) ?></a></td>
-                        <td><?= $this->e($reservation->responsable) ?></td>
-                        <td><?= $this->e($reservation->motif) ?></td>
-                        <td><?= $this->e($reservation->date_debut) ?></td>
-                        <td><?= $this->e($reservation->date_fin) ?></td>
-                        <td>
-                            <?php if ($reservation->statut === 'confirmée'): ?>
-                                <span class="badge badge-actif">Confirmée</span>
-                            <?php else: ?>
-                                <span class="badge badge-inactif">Annulée</span>
-                            <?php endif; ?>
-                        </td>
-                        <td class="actions">
-                            <?php if ($reservation->statut === 'confirmée'): ?>
-                                <form method="post" action="/reservations/<?= (int) $reservation->id ?>/cancel" class="inline">
-                                    <button type="submit" class="lien-supprimer">Annuler</button>
-                                </form>
-                            <?php endif; ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <div class="cartes-grille">
+        <?php foreach ($reservations as $reservation): ?>
+            <div class="carte">
+                <div class="carte-entete">
+                    <h3 class="carte-titre">🏢 <?= $this->e($reservation->salle->nom) ?></h3>
+                    <div class="carte-sous-titre">
+                        <span class="carte-badge <?= $reservation->statut === 'confirmée' ? 'confirmee' : 'annulee' ?>">
+                            <?= $reservation->statut === 'confirmée' ? '✓ Confirmée' : '✗ Annulée' ?>
+                        </span>
+                    </div>
+                </div>
+                <div class="carte-corps">
+                    <div class="carte-item">
+                        <span class="carte-label">Responsable</span>
+                        <span class="carte-valeur"><?= $this->e($reservation->responsable) ?></span>
+                    </div>
+                    <div class="carte-item">
+                        <span class="carte-label">Motif</span>
+                        <span class="carte-valeur"><?= $this->e($reservation->motif) ?></span>
+                    </div>
+                    <div class="carte-item">
+                        <span class="carte-label">Début</span>
+                        <span class="carte-valeur">📅 <?= $this->e($reservation->date_debut) ?></span>
+                    </div>
+                    <div class="carte-item">
+                        <span class="carte-label">Fin</span>
+                        <span class="carte-valeur">🕐 <?= $this->e($reservation->date_fin) ?></span>
+                    </div>
+                </div>
+                <div class="carte-pied">
+                    <a href="/reservations/<?= (int) $reservation->id ?>">Détails</a>
+                    <?php if ($reservation->statut === 'confirmée'): ?>
+                        <form method="post" action="/reservations/<?= (int) $reservation->id ?>/cancel" class="inline" style="flex: 1;">
+                            <button type="submit" class="bouton bouton-danger" style="width: 100%; margin: 0;">Annuler</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 <?php endif; ?>
