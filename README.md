@@ -37,3 +37,27 @@ cp .env.example .env
 ## Création de la base et lancement
 
 Voir les scripts dans `database/` et le `README` complété à la fin du projet.
+## Déploiement
+
+### Application en ligne (lien principal)
+
+**👉 https://web-production-1b1bd.up.railway.app/**
+
+L'application est déployée et accessible via HTTPS. Lien GitHub Pages :
+
+**👉 https://idriss221.github.io/Nprojet/**
+
+### Liens de déploiement
+
+| Type | Lien |
+| ---- | ---- |
+| Code (Release GitHub `v0.12.0`) | https://github.com/idriss221/Nprojet/releases/tag/v0.12.0 |
+| Appli en ligne (Railway) | https://web-production-1b1bd.up.railway.app/ |
+| Accès dep. GitHub (Pages) | https://idriss221.github.io/Nprojet/ |
+| Image (Docker Hub `v0.12.0`) | https://hub.docker.com/r/idriss45/gestion_de_salle_universitaire1/tags?name=v0.12.0 |
+
+Récupération de l'image :
+
+```bash
+docker pull idriss45/gestion_de_salle_universitaire1:v0.12.0
+```
