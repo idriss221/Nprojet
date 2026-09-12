@@ -49,12 +49,20 @@ L'application est déployée et accessible via HTTPS. Lien GitHub Pages :
 
 ### Liens de déploiement
 
+**Deux déploiements distincts et fonctionnels :**
+
+| Déploiement | Source | URL (en ligne) | État |
+| ----------- | ------ | -------------- | ---- |
+| 🔵 **Code** | GitHub (branche `main`, dernière version) | https://web-production-1b1bd.up.railway.app/ | ✅ HTTP 200 |
+| 🐳 **Image** | Docker Hub (`idriss45/gestion_de_salle_universitaire1:v0.12.0`) | https://web-image-production-9e7d.up.railway.app/ | ✅ HTTP 200 |
+
+Autres accès :
+
 | Type | Lien |
 | ---- | ---- |
-| Code (Release GitHub `v0.12.0`) | https://github.com/idriss221/Nprojet/releases/tag/v0.12.0 |
-| Appli en ligne (Railway) | https://web-production-1b1bd.up.railway.app/ |
-| Accès dep. GitHub (Pages) | https://idriss221.github.io/Nprojet/ |
-| Image (Docker Hub `v0.12.0`) | https://hub.docker.com/r/idriss45/gestion_de_salle_universitaire1/tags?name=v0.12.0 |
+| Release GitHub `v0.12.0` | https://github.com/idriss221/Nprojet/releases/tag/v0.12.0 |
+| Accès GitHub (Pages → appli) | https://idriss221.github.io/Nprojet/ |
+| Image Docker Hub | https://hub.docker.com/r/idriss45/gestion_de_salle_universitaire1/tags?name=v0.12.0 |
 
 Récupération de l'image :
 
